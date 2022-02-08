@@ -21,10 +21,8 @@
                     </div>
 
                     <div class="header__cart">
-                        <a href="#">
-                            cart
-                            <div class="header__cart-counter">0</div>
-                        </a>
+                        cart
+                        <div class="header__cart-counter">0</div>
                     </div>
                 </div>
             </div>
@@ -44,11 +42,24 @@
             <div class="footer__container">
                 <div class="footer__info">
                     <a href="#" class="footer__info-contact">Contact us</a>
+                    <br>
                     <a href="#" class="footer__info-feedback">Leave us with some feedback!!</a>
                     <p class="license">@ 2020 Gadget-store</p>
                 </div>
             </div>
         </footer>
+    </div>
+
+    <div class="modal">
+        <div class="modal__dialog">
+            <div class="modal__content">
+                <img src="resources/images//cart/cross.svg" alt="cross" class="modal__close" data-close-modal>
+                <div class="modal__name">Your Cart</div>
+                <div class="modal__products-wrapper"></div>
+                <div class="modal__cart-total">Total: $ <span>0</span></div>
+                <button class="modal__cart-clear " data-close-modal>Clear Cart</button>
+            </div>
+        </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
