@@ -1,6 +1,5 @@
 window.addEventListener('DOMContentLoaded', () => {
-    
-    const setCards  = function (data) {
+    const setCards = function (data) {
         data.forEach(({name, price, imgPath, imgAlt}) => {
             const element = document.createElement('div');
             
@@ -21,7 +20,16 @@ window.addEventListener('DOMContentLoaded', () => {
         });
     };
 
-    axios.get("http://localhost:3000/products")
+    const smthGoWrong = function () {
+        const element = document.createElement('div');
+
+        element.innerHTML = '<p> Sorry, but smth went wrong( </p>';
+        element.classList.add('main__wrong-text');
+
+        document.querySelector('.main__container').append(element);
+    };
+
+    axios.get('http://localhost:3000/products')
         .then(data => setCards(data.data))
-        .catch();
+        .catch(() => smthGoWrong());
 });

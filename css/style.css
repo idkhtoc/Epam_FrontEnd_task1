@@ -119,6 +119,15 @@ body {
     justify-items: center;
 }
 
+.main__wrong-text {
+    text-align: center;
+}
+
+.main__wrong-text p{
+    color: #918e63;
+    font-size: 20px;
+}
+
 .main__card {
     display: flex;
     flex-direction: column;
