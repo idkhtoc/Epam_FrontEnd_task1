@@ -95,6 +95,7 @@ body {
 .main__container button {
     border: 1px solid #a0a3ad;
     height: 40px;
+    cursor: pointer;
 }
 
 .main__container button:hover {
@@ -314,5 +315,13 @@ body {
 @media screen and (max-width: 563px) {
     .main__cards-wrapper {
         grid-template-columns: 1fr;
+    }
+
+    .modal__products-wrapper {
+        width: 90%;
+    }
+
+    .modal__product-info {
+        width: 50%;
     }
 }

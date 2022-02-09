@@ -2,13 +2,7 @@ window.addEventListener('DOMContentLoaded', () => {
     // Products behavior
 
     const setCards = function (data) {
-        data.forEach(({
-            name,
-            price,
-            imgPath,
-            imgAlt,
-            id
-        }) => {
+        data.forEach(({name, price, imgPath, imgAlt, id}) => {
             const element = document.createElement('div');
 
             element.innerHTML = `
@@ -130,7 +124,7 @@ window.addEventListener('DOMContentLoaded', () => {
         }
         else if (event.target.classList.contains('modal__product-clear')) {
             event.target.parentElement.remove();
-            
+
             let cart = JSON.parse(localStorage.cart);
             cart.splice(cart.indexOf(cart.find(item => item.id == product.id)), 1);
 
@@ -214,4 +208,54 @@ window.addEventListener('DOMContentLoaded', () => {
 
         updateCart(curentProduct, 1);
     }
+
+    // Sort products
+
+    const buttons = document.querySelector('.main__sort-wrapper');
+
+    function sort(byWhat, target) {
+        document.querySelector('.main__cards-wrapper').innerHTML = '';
+
+        axios.get('http://localhost:3000/products')
+        .then(data => {
+            data = data.data.slice(2);
+
+            if (target.dataset.direction == '') {
+                data.sort((a, b) => a[byWhat] > b[byWhat] ? -1 : 1);
+                
+                target.innerHTML += ' ↓';
+                target.dataset.direction = 'down';
+            } else {
+
+                target.innerHTML += (target.dataset.direction == 'down') ? ' ↑' : ' ↓';
+                target.dataset.direction = (target.dataset.direction == 'down') ? 'up' : 'down';
+                
+                data.sort((a, b) => a[byWhat] > b[byWhat] ? 1 : -1);
+                
+                if (target.dataset.direction == 'down') {
+                    data.reverse();
+                }
+            }
+
+            setCards(data);
+        })
+        .catch(() => smthGoWrong());
+    }
+
+    buttons.addEventListener('click', event => {
+        if (event.target.classList.contains('main__sort-by-name')) {
+            buttons.querySelector('.main__sort-by-price').innerHTML = 'Sort by Price';
+            event.target.innerHTML = 'Sort by Product Name';
+
+            sort('name', event.target);
+        }
+        else if (event.target.classList.contains('main__sort-by-price')) {
+            buttons.querySelector('.main__sort-by-price').innerHTML = 'Sort by Product Name';
+            event.target.innerHTML = 'Sort by Price';
+
+            sort('price', event.target);
+        }
+    });
+    
+
 });
