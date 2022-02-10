@@ -218,7 +218,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
         axios.get('http://localhost:3000/products')
         .then(data => {
-            data = data.data.slice(2);
+            data = data.data;
 
             if (target.dataset.direction == '') {
                 data.sort((a, b) => a[byWhat] > b[byWhat] ? -1 : 1);
@@ -250,12 +250,10 @@ window.addEventListener('DOMContentLoaded', () => {
             sort('name', event.target);
         }
         else if (event.target.classList.contains('main__sort-by-price')) {
-            buttons.querySelector('.main__sort-by-price').innerHTML = 'Sort by Product Name';
+            buttons.querySelector('.main__sort-by-name').innerHTML = 'Sort by Product Name';
             event.target.innerHTML = 'Sort by Price';
 
             sort('price', event.target);
         }
     });
-    
-
 });
